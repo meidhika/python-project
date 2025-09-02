@@ -1,6 +1,7 @@
 from . import Database
 from .Util import random_string
 import time
+import os
 
 
 def create(tahun, judul, penulis):
@@ -82,3 +83,22 @@ def update(pk, no_buku, data_add, judul, penulis, tahun):
             file.write(data_str)
     except:
         print("Data tidak ditemukan, Error dalam update data")
+
+
+def delete(no_buku):
+    try:
+        with (open(Database.DB_NAME, "r")) as file:
+            counter = 0
+            while(True):
+                content = file.readline()
+                if len(content) == 0:
+                    break
+                elif counter == no_buku -1:
+                    pass
+                else:
+                    with (open("data_temp.txt", "a", encoding="utf-8")) as temp_file:
+                        temp_file.write(content)
+                counter += 1       
+    except:
+        print("Data tidak ditemukan, Error dalam delete data")
+    os.replace("data_temp.txt", Database.DB_NAME)

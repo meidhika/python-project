@@ -50,17 +50,18 @@ def update_console():
         print("Silahkan Pilih nomor buku yang akan diupdate")
         no_buku = int(input("Masukkan Nomor Buku: "))
         data_buku = Operasi.read(index=no_buku)
+        data_break = data_buku.split(",")
+        pk = data_break[0]
+        data_add = data_break[1]
+        judul = data_break[2]
+        penulis = data_break[3]
+        tahun = data_break[4][:-1]
         if data_buku:
+            
             break
         else:
             print("Nomor buku tidak ditemukan")
-    data_break = data_buku.split(",")
-    pk = data_break[0]
-    data_add = data_break[1]
-    judul = data_break[2]
-    penulis = data_break[3]
-    tahun = data_break[4][:-1]
-
+            
     while(True):
         # data yang ingin di update
         print("\n\n"+"="*100)
@@ -98,4 +99,34 @@ def update_console():
             break
     Operasi.update(pk, no_buku, data_add, judul, penulis, tahun)
     read_console()
+
+
+def delete_console():
+    read_console()
+    while (True):
+        print("Silahkan Pilih nomor buku yang akan dihapus")
+        no_buku = int(input("Masukkan Nomor Buku: "))
+        data_buku = Operasi.read(index=no_buku)
+
+        if data_buku:
+            data_break = data_buku.split(",")
+            pk = data_break[0]
+            data_add = data_break[1]
+            judul = data_break[2]
+            penulis = data_break[3]
+            tahun = data_break[4][:-1]
+
+            # data yang ingin di update
+            print("\n\n"+"="*100)
+            print("Data yang ingin anda hapus?")
+            print(f"1. Judul\t: {judul:.40}")
+            print(f"2. Penulis\t: {penulis:.40}")
+            print(f"3. Tahun\t: {tahun:40}")
+            is_done = input("Apakah data yakin data dihapus? (y/n): ")
+            if is_done == "y" or is_done == "Y":
+                Operasi.delete(no_buku)
+                break
+        else:
+            print("Nomor buku tidak ditemukan")
+    print("Data berhasil dihapus")
         

@@ -29,7 +29,7 @@ if __name__ == "__main__":
         print("1. Lihat Buku")
         print("2. Buat Buku")
         print("3. Update Buku")
-        print("4. Delte Buku \n")
+        print("4. Delete Buku \n")
 
         user_option = input("Masukkan Opsi: ")
         match user_option:
@@ -40,7 +40,7 @@ if __name__ == "__main__":
             case "3":
                 CRUD.update_console()
             case "4":
-                print("Delete Buku")
+                CRUD.delete_console()
             case _:
                 print("Opsi Tidak Ditemukan")
         is_done = input("Apakah Selesai? (y/n): ")
